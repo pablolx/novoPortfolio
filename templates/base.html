@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Minha Página{% endblock %}</title>
+
+    <!-- Bootstrap 5.3.8 CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+{% include 'navbar.html' %}
+{% block content %}
+{% endblock %}
+
+<footer class="card-footer text-body text-center">
+  <div >
+    <p>&copy; <span id="year"></span> Pablo Pinheiro • Web Developer & Machine Learning</p>
+  </div>
+</footer>
+
+<script>
+  // Atualiza o ano automaticamente
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+<!-- Bootstrap 5.3.8 Bundle JS (inclui Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

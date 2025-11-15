@@ -1,0 +1,40 @@
+# Diretórios e arquivos do PyCharm
+.idea/
+*.iml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# Arquivos de ambiente
+.env
+*.env
+venv/
+ENV/
+env/
+.venv/
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
+
+# Migrations (opcional)
+**/migrations/*.py
+!**/migrations/__init__.py

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmar Exclusão de Projeto{% endblock %}
+
+{% block content %}
+    <div class="containerExclusao">
+            <h2>Confirmar Exclusão de Projeto</h2>
+            <p>Tem certeza de que deseja excluir o projeto "{{ object.titulo }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">Confirmar Exclusão</button>
+                <a href="{% url 'projetos_list' %}"><button type="button">Cancelar</button></a>
+            </form>
+    </div>
+{% endblock %}

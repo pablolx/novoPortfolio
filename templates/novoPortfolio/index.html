@@ -1,0 +1,43 @@
+<!-- templates/meu_app/pagina.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+<main class="py-5">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+        <!-- Foto -->
+            <div class="col-12 col-md-3 text-center">
+                <img src="{% static 'img/foto_perfil.png' %}" alt="Foto de perfil de Pablo C. Pinheiro" class="img-fluid rounded shadow-sm p-5" loading="lazy">
+            </div>
+
+            <!-- Informações principais -->
+            <div class="col-12 col-md-6">
+                <h1 class="h3 mb-1">Pablo C. Pinheiro</h1>
+                <h2 class="h5 text-muted mb-3">Desenvolvedor Python · Django · Web Scraping · Pandas</h2>
+                <br>
+
+                <p class="mb-2">Bem-vindo ao meu portfólio.</p>
+                <p class="mb-2">Sou profissional de tecnologia com mais de 20 anos de experiência e, após a pandemia de COVID, migrei para a área de programação.</p>
+                <p class="mb-3">Aqui você encontrará meus projetos e informações de contato.</p>
+
+                <a href="{% url 'projetos_list' %}" class="btn btn-secondary me-2">Ver projetos</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'projetos_create' %}" class="btn btn-outline-secondary">Novo projeto</a>
+                {% endif %}
+            </div>
+
+            <!-- Redes sociais -->
+            <aside class="col-12 col-md-3">
+                <h3 class="h6 mb-3">Redes Sociais</h3>
+                <nav class="nav flex-column">
+                    <a class="nav-link p-0 mb-2 text-primary" href="http://www.linkedin.com/in/pablo-pinheiro-62212322" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a class="nav-link p-0 text-primary" href="https://github.com/pablolx" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </nav>
+            </aside>
+        </div>
+    </div>
+</main>
+{% endblock %}
