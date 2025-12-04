@@ -59,9 +59,80 @@
         {% endfor %}
       </div>
 
+      {% if is_paginated %}
+      <nav aria-label="Navegação de páginas" class="mt-4">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Anterior">
+                &laquo; Anterior
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">&laquo; Anterior</span></li>
+          {% endif %}
+
+          {% comment %} Pagination numbers with ellipses for long ranges {% endcomment %}
+          {% with total=page_obj.paginator.num_pages current=page_obj.number %}
+            {% if total <= 7 %}
+              {% for num in page_obj.paginator.page_range %}
+                {% if num == current %}
+                  <li class="page-item active" aria-current="page"><span class="page-link">{{ num }}</span></li>
+                {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {# First page #}
+              {% if current > 3 %}
+                <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+              {% endif %}
+
+              {# Left ellipsis #}
+              {% if current > 4 %}
+                <li class="page-item disabled"><span class="page-link">&hellip;</span></li>
+              {% endif %}
+
+              {# Middle pages: current-2 .. current+2 #}
+              {% for num in page_obj.paginator.page_range %}
+                {% if num >= current|add:'-2' and num <= current|add:'2' %}
+                  {% if num == current %}
+                    <li class="page-item active" aria-current="page"><span class="page-link">{{ num }}</span></li>
+                  {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              {# Right ellipsis #}
+              {% if current < total|add:'-3' %}
+                <li class="page-item disabled"><span class="page-link">&hellip;</span></li>
+              {% endif %}
+
+              {# Last page #}
+              {% if current < total|add:'-2' %}
+                <li class="page-item"><a class="page-link" href="?page={{ total }}">{{ total }}</a></li>
+              {% endif %}
+            {% endif %}
+          {% endwith %}
+
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Próximo">
+                Próximo &raquo;
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item disabled"><span class="page-link">Próximo &raquo;</span></li>
+          {% endif %}
+        </ul>
+        <div class="text-center text-muted small">Mostrando {{ page_obj.start_index }}–{{ page_obj.end_index }} de {{ page_obj.paginator.count }} projetos</div>
+      </nav>
+      {% else %}
       <footer class="mt-4 text-end text-muted">
         <span>Total de projetos: <strong>{{ project_list|length }}</strong></span>
       </footer>
+      {% endif %}
 
     {% else %}
       <div class="card text-center py-5">
